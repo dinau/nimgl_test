@@ -38,6 +38,11 @@ $ nimgl_test.exe
 その他、`make`でもコンパイル可能  
 `make clean` も使える
 
+以下は実行結果
+
+![alt](img/nimgl-screen-shot-jp-font.png)
+
+
 #### フォント追加方法
 
 ---
