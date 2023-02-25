@@ -19,7 +19,7 @@ import std/[strutils]
 # See "version.nims" included in "config.nims".
 const releaseDate = "2023/02"
 var seqOpts = @[""]
-seqOpts.add  "-d:VERSION:$# -d:REL_DATE:$#" % [version,releaseDate]
+seqOpts.add "-d:VERSION:$# -d:REL_DATE:$#" % [version,releaseDate]
 
 backend = "cpp"
 

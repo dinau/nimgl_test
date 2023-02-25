@@ -1,3 +1,5 @@
+#switch "app","gui"
+
 #switch "passC","-std=c++17"
 #
 #switch "define", "release"
@@ -22,9 +24,9 @@ if hostOS == "windows": # for static link
 include "version.nims"
 #
 var TC = "gcc"
- #var TC = "clang"
- #var TC = "vcc"
- #var TC = "tcc"
+#var TC = "clang"
+#var TC = "vcc"
+#var TC = "tcc"
 
 if TC != "vcc":
   if "" == findExe(TC): # GCC is default compiler if TC dosn't exist on the PATH

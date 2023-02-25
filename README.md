@@ -1,6 +1,6 @@
 ### Nimgl test program for japanese fonts
 
-Nimgl: ImGui demo program test for Japanese fonts
+Nimgl: ImGui demo program test for Japanese fonts  
 Written by audin 2023/02
 
 詳細は[ここ](https://mpu.seesaa.net/article/498328270.html)を参照

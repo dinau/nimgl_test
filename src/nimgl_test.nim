@@ -2,7 +2,7 @@
 # For Windows10.
 # For Linux Debian 11 Bullseye,
 #   $ sudo apt install xorg-dev libopengl-dev ibgl1-mesa-glx libgl1-mesa-dev
-#   $ nim cpp -r -d:danger -d:strip --opt:size --nimcache:.nimcahce src/nimgl_test.nim
+#   $ nim cpp -r -d:danger -d:strip --nimcache:.nimcahce src/nimgl_test.nim
 
 import nimgl/imgui, nimgl/imgui/[impl_opengl, impl_glfw]
 import nimgl/[opengl, glfw]
