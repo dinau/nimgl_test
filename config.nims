@@ -1,4 +1,16 @@
 #switch "app","gui"
+const STATIC_LINK = true
+#
+if hostOS == "windows":
+  when STATIC_LINK: # for static link
+    switch "passC", "-static"
+    switch "passL", "-static"
+    # for c backend     https://github.com/nimgl/imgui/pull/9
+    #switch "define","cimguiStaticCgcc"
+    #switch "gcc.linkerexe","g++"
+  else: # using dll
+    switch "define", "glfwDLL"
+    switch "define","cimguiDLL"
 
 #switch "passC","-std=c++17"
 #
@@ -13,13 +25,6 @@ const LTO = false
 when LTO:
   switch "passC", "-fno-strict-aliasing"
   switch "passL", "-fno-strict-aliasing"
-
-if hostOS == "windows": # for static link
-  switch "passC", "-static"
-  switch "passL", "-static"
-  # for c backend     https://github.com/nimgl/imgui/pull/9
-  #switch "define","cimguiStaticCgcc"
-  #switch "gcc.linkerexe","g++"
 
 include "version.nims"
 #

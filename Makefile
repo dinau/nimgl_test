@@ -25,7 +25,7 @@ ver:
 
 GIT_REPO = ../../00rel/$(TARGET)
 gitup:
-	@-rm $(GIT_REPO)/* $(GIT_REPO)/src/ $(GIT_REPO)/img/
+	-rm $(GIT_REPO)/* $(GIT_REPO)/src/* $(GIT_REPO)/img/*
 	cp -f $(TARGET).nimble $(GIT_REPO)
 	cp -f src/$(TARGET).nim $(GIT_REPO)/src/
 	cp -f img/* $(GIT_REPO)/img/
