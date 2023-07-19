@@ -1,10 +1,14 @@
+switch "passC","-DIMGUI_ENABLE_WIN32_DEFAULT_IME_FUNCTIONS"
+switch "passL","-limm32"
+
 #switch "app","gui"
 const STATIC_LINK = true
 #
 if hostOS == "windows":
   when STATIC_LINK: # for static link
-    switch "passC", "-static"
-    switch "passL", "-static"
+    switch "backend","cpp"
+    switch "passC", "-static -static-libgcc"
+    switch "passL", "-static -static-libgcc"
     # for c backend     https://github.com/nimgl/imgui/pull/9
     #switch "define","cimguiStaticCgcc"
     #switch "gcc.linkerexe","g++"
@@ -14,17 +18,14 @@ if hostOS == "windows":
 
 #switch "passC","-std=c++17"
 #
-#switch "define", "release"
-switch("define", "danger")
+switch "define", "release"
+#switch "define", "danger"
 #
 #switch "opt", "size"
 #switch "passC","-O2"
 
 #const LTO = true # further reudce code size
 const LTO = false
-when LTO:
-  switch "passC", "-fno-strict-aliasing"
-  switch "passL", "-fno-strict-aliasing"
 
 include "version.nims"
 #

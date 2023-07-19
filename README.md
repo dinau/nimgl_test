@@ -3,12 +3,14 @@
 Nimgl: ImGui demo program test for Japanese fonts  
 Written by audin 2023/02
 
+ImGui/Nimglで日本語表示・入力のテスト
+
 詳細は[ここ](https://mpu.seesaa.net/article/498328270.html)を参照
 
 #### Prerequisite
 
 ---
-- nim-1.6.10 at this moment
+- nim-1.6.14 at this moment
 - For Linux Debian 11 Bullseye
 
    ```sh
@@ -24,19 +26,23 @@ Written by audin 2023/02
 ```sh
 $ git clone https://github.com/dinau/nimgl_test
 $ cd nimgl_test
-$ nimble build --verbose
 ```
 
-`--verbose`は無くても良いが、あればコンパイル状況が分かりやすい
+```sh
+$ make
+```
+
+or
+
+```sh
+$ nimble build 
+```
 
 実行は、
 
 ```sh
-$ nimgl_test.exe 
+$ ./nimgl_test
 ```
-
-その他、`make`でもコンパイル可能  
-`make clean` も使える
 
 以下は実行結果
 
@@ -61,6 +67,24 @@ proc addFontFromFileTTF*(self: ptr ImFontAtlas
     , font_cfg: ptr ImFontConfig = nil
     , glyph_ranges: ptr ImWchar = nil): ptr ImFont
     {.importc: "ImFontAtlas_AddFontFromFileTTF".}
+```
+
+#### 日本語入力(IME)について
+
+---
+
+以下のコンパイル/リンク時オプションを加えることで日本語入力を可能としている
+
+```sh
+--passc:"-DIMGUI_ENABLE_WIN32_DEFAULT_IME_FUNCTIONS"
+--passL:"-limm32"
+```
+
+同じことをconfig.nims内に記述する場合は以下となる
+
+```nim
+switch "passC","-DIMGUI_ENABLE_WIN32_DEFAULT_IME_FUNCTIONS"
+switch "passL","-limm32"
 ```
 
 #### 参考

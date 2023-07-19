@@ -1,21 +1,43 @@
 TARGET = nimgl_test
+
 ifeq ($(OS),Windows_NT)
 	EXE = .exe
 endif
+NULL = .tmp
 
-.PHONY: clean run dll ver gitup
+.PHONY: clean run dll ver gitup info
 
 IMGUI_DIALOG = false
 
 ifeq ($(IMGUI_DIALOG),false)
-all:
+all: build
+
+build:
 	@nimble build --verbose
+
 clean:
 	@nimble clean --verbose
+
 run:
 	@nimble run --verbose
+
+info: dll ver
+
 dll:
-	@-strings $(TARGET)$(EXE) |  rg -i \.dll
+	@echo
+	@echo [dlls depend on]
+	@#-ldd $(TARGET)$(EXE) |  rg -ive "windows/system" | rg -ive "windows/winsxs"
+	@#-strings $(TARGET)$(EXE) |  rg -i \.dll
+	@-   ldd -V > $(NULL)     \
+		&& rg  -V > $(NULL)     \
+		&& strings -v > $(NULL) \
+	  && ldd $(TARGET)$(EXE)   | rg -ive "windows/system" | rg -ive "winsxs"; \
+		   echo ---; \
+		   strings $(TARGET)$(EXE)  | rg -ie "\.dll" | rg -ive " load" | sort | uniq -i
+	@-rm .tmp
+	@echo
+	@echo [cimgui.dll version]
+	@-strings cimgui.dll | rg -ie "^\d\.\d\d\.\d"
 ver:
 	@# version check
 	@echo [$(TARGET).nimlbe]
@@ -23,11 +45,12 @@ ver:
 	@echo [version.nims]
 	-@rg -ie "\d\.\d\.\d" version.nims
 
-GIT_REPO = ../../00rel/$(TARGET)
+GIT_REPO = ../../../00rel/$(TARGET)
 gitup:
-	-rm $(GIT_REPO)/* $(GIT_REPO)/src/* $(GIT_REPO)/img/*
+	-rm -fr $(GIT_REPO)/* $(GIT_REPO)/src/* $(GIT_REPO)/img/*
+	-mkdir -p $(GIT_REPO)/src $(GIT_REPO)/img
 	cp -f $(TARGET).nimble $(GIT_REPO)
-	cp -f src/$(TARGET).nim $(GIT_REPO)/src/
+	cp -f src/*.nim $(GIT_REPO)/src/
 	cp -f img/* $(GIT_REPO)/img/
 	cp -f imgui.ini $(GIT_REPO)
 	cp -f version.nims $(GIT_REPO)
