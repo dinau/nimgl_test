@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Nimgl test program for japanese fonts](#nimgl-test-program-for-japanese-fonts)
+  - [Prerequisite](#prerequisite)
+  - [Compile and run](#compile-and-run)
+  - [フォント追加方法](#%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E8%BF%BD%E5%8A%A0%E6%96%B9%E6%B3%95)
+  - [日本語入力(IME)について](#%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9Bime%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+  - [参考](#%E5%8F%82%E8%80%83)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ### Nimgl test program for japanese fonts
 
 Nimgl: ImGui demo program test for Japanese fonts  
@@ -44,36 +56,43 @@ $ nimble build
 $ ./nimgl_test
 ```
 
-以下は実行結果
-
-![alt](img/nimgl-screen-shot-jp-font.png)
-
+以下は実行結果  
+- 2023/07
+テーマ3色とフォント4種(Windows10)を選択できるようにした  
+   ![alt](img/nimgl-screen-shot-jp-font-2023-07.png)
 
 #### フォント追加方法
 
 ---
 
-```nim
-io.Fonts->AddFontDefault();
-io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\segoeui.ttf", 18.0f);
-```
+ソース [setupFonts.nim](https://github.com/dinau/nimgl_test/blob/main/src/setupFonts.nim)
 
-プロトタイプ宣言
+- Nim
 
-```nim
-proc addFontFromFileTTF*(self: ptr ImFontAtlas
-    , filename: cstring
-    , size_pixels: float32
-    , font_cfg: ptr ImFontConfig = nil
-    , glyph_ranges: ptr ImWchar = nil): ptr ImFont
-    {.importc: "ImFontAtlas_AddFontFromFileTTF".}
-```
+  プロトタイプ宣言
+
+   ```nim
+   proc addFontFromFileTTF*(self: ptr ImFontAtlas
+       , filename: cstring
+       , size_pixels: float32
+       , font_cfg: ptr ImFontConfig = nil
+       , glyph_ranges: ptr ImWchar = nil): ptr ImFont
+       {.importc: "ImFontAtlas_AddFontFromFileTTF".}
+   ```
+
+- C++
+
+  ```cpp
+  io.Fonts->AddFontDefault();
+  io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\segoeui.ttf", 18.0f);
+  ```
 
 #### 日本語入力(IME)について
 
 ---
 
-以下のコンパイル/リンク時オプションを加えることで日本語入力を可能としている
+以下のNim言語コンパイル / リンク時オプションを加えることで日本語入力を可能としている  
+オプションはバックエンドのC/C++コンパイラにのみ渡される
 
 ```sh
 --passc:"-DIMGUI_ENABLE_WIN32_DEFAULT_IME_FUNCTIONS"
@@ -89,7 +108,9 @@ switch "passL","-limm32"
 
 #### 参考
 
-[Viewport, Platform: Fixed IME positioning for multi-viewport. Moved API from...](http://dalab.se.sjtu.edu.cn/gitlab/xiaoyuwei/imgui/-/commit/cb78e62df93732b64afcc9d4cd02e378730b32af)
+---
 
-[ImGui で日本語と記号♥と絵文字😺の表示](https://zenn.dev/tenka/articles/display_japanese_symbols_and_emoji_with_imgui)
+[Dear ImGuiで日本語入力時のIMEの位置をいい感じにする](https://qiita.com/babiron_i/items/759d80965b497384bc0e)  
+[Viewport, Platform: Fixed IME positioning for multi-viewport. Moved API from...](http://dalab.se.sjtu.edu.cn/gitlab/xiaoyuwei/imgui/-/commit/cb78e62df93732b64afcc9d4cd02e378730b32af)  
+[ImGui で日本語と記号♥と絵文字😺の表示](https://zenn.dev/tenka/articles/display_japanese_symbols_and_emoji_with_imgui)  
 

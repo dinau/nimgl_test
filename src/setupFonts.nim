@@ -22,10 +22,10 @@ when defined(windows):
        osRootDir: os.getEnv("windir") # get OS root
        ,fontDir: "fonts"
        ,fontTable: @[ # 以下全て有効にすると起動が遅くなる
-         ("meiryo.ttc","メイリオ",14.0)
-        # ,("YuGothM.ttc","遊ゴシック M",11.0)
-        # ,("meiryob.ttc","メイリオ B",14.0)
-        # ,("msgothic.ttc","MS ゴシック",11.0)
+         ("meiryob.ttc","メイリオ B",14.0)
+         ,("meiryo.ttc","メイリオ",14.0)
+         ,("YuGothM.ttc","遊ゴシック M",11.0)
+         ,("msgothic.ttc","MS ゴシック",11.0)
         # ,("myricam.ttc","MyricaM",11.0)
          ])
 else: # For Debian/Ubuntu

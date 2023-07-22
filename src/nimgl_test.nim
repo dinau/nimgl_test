@@ -1,4 +1,7 @@
-# Written by audin 2023/02
+# 2023/07 modified
+# 2023/02 first
+# written by audin.
+#
 # For Windows10.
 # For Linux Debian 11 Bullseye,
 #   $ sudo apt install xorg-dev libopengl-dev ibgl1-mesa-glx libgl1-mesa-dev
@@ -23,10 +26,6 @@ var
   fExistMultbytesFonts = false
 
 var sBuf{.global.}:string  = newString(200)
-#var csBuf{.global.}:cstring = cast[cstring](sBuf)
-#var csBuf:cstring = "12345678901234567890"
-
-#sBuf[sBuf.len - 1] = chr(0)
 
 # Forward definition
 proc winMain(hWin:GLFWWindow)
@@ -100,12 +99,37 @@ proc winMain(hWin:GLFWWindow)  =
     startSimpleWindow() # Simple window start
 
     igRender()
-
     glClearColor(0.45f, 0.55f, 0.60f, 1.00f) # 背景の色
     glClear(GL_COLOR_BUFFER_BIT)
 
     igOpenGL3RenderDrawData(igGetDrawData())
     hWin.swapBuffers()
+
+#-------------------
+# helpMaker
+#-------------------
+proc helpMarker(desc:string) =
+  igTextDisabled("(?)")
+  if (igIsItemHovered()):
+      igBeginTooltip()
+      igPushTextWrapPos(igGetFontSize() * 35.0f)
+      igTextUnformatted(desc)
+      igPopTextWrapPos()
+      igEndTooltip()
+
+#-------------------
+# showStyleSelector
+#-------------------
+proc showStyleSelector(label:string) : bool =
+  var style_idx {.global.}:int32  = -1
+  if igCombo(label, addr style_idx, "Dark\0Light\0Classic\0"):
+      case style_idx
+      of 0: igStyleColorsDark()
+      of 1: igStyleColorsLight()
+      of 2: igStyleColorsClassic()
+      else: discard
+      return true
+  return false
 
 #-------------------
 # startSimpleWindow
@@ -117,19 +141,43 @@ proc startSimpleWindow() =
     somefloat {.global.} = 0.0'f32
     counter {.global.} = 0'i32
     sFnameSelected {.global.}: string
-  let pio = igGetIO()
-  #
-  let sTitle = "[ImGui: v$#](起動時フォント:$# - $#)" % [$igGetVersion(),sActiveFontTitle, sActiveFontName]
+  var pio = igGetIO()
+
+  ### Window開始
+  let sTitle = "[ImGui: v$#] テスト by Nim-lang 2023/07" % [$igGetVersion()]
   igBegin(sTitle.cstring)
   defer: igEnd()
-  #
+  ### テーマの選択
+  discard showStyleSelector("テーマ色の選択")
+  ### フォント選択 コンボボックス
+  igSeparator()
+  var fontCurrent = igGetfont()
+  if igBeginCombo("フォント選択",fontCurrent.getDebugName()):
+    defer: igEndCombo()
+    for n in 0..<pio.fonts.fonts.size:
+      let font = pio.fonts.fonts.data[n]
+      igPushID(font)
+      if igSelectable(font.getDebugName(),font == fontCurrent):
+        pio.fontDefault = font
+      igPopID()
+  igSameLine()
+  helpMarker("""
+- フォントの追加は io.Fonts->AddFontFromFileTTF().
+- フォントマップは io.Fonts->GetTexDataAsXXXX() 又は io.Fonts->Build()が実行された時に追加される.
+- 詳細はFAQ と docs/FONTS.md を読んで下さいs.
+- 実行時にフォントの追加と削除が必要なら(例:DPIの変更等) NewFrame()の呼び出し前に行って下さい."""
+  )
+  ###
+  igSeparator()
   igText("これは日本語テキスト")
   igInputText("ここに日本語入力".cstring,sBuf.cstring,sBuf.len.csize_t,0.ImguiInputTextFlags,nil,nil)
   igText("出力: ")
   igSameLine()
-  igText(sBuf)
-  igCheckbox("デモ・ウインドウ表示", show_demo.addr)
+  igText(sBuf.cstring)
+  igSeparator()
   igSliderFloat("浮動小数", somefloat.addr, 0.0f, 1.0f)
+  #
+  igSeparator()
   when defined(windows):
     if igButton("ファイルを開く", ImVec2(x: 0, y: 0)):
       sFnameSelected = fileDialog(fdOpenFile, path = ".", filename = "*.*",
@@ -137,14 +185,30 @@ proc startSimpleWindow() =
                             filters="Source:c,cpp,m;Header:h,hpp")
     igSameLine()
   igText("選択ファイル名 = %s", sFnameSelected.cstring)
+  #
+  igSeparator()
   igText("描画フレームレート  %.3f ms/frame (%.1f FPS)"
     , 1000.0f / pio.framerate, pio.framerate)
   igText("経過時間 = %.1f [s]", counter.float32 / pio.framerate)
   counter.inc
   let delay = 600 * 3
   somefloat = (counter mod delay).float32 / delay.float32
+  #
+  igSeparator()
+  igCheckbox("デモ・ウインドウ表示", show_demo.addr)
 
 #--------------
 # main
 #--------------
 main()
+
+
+
+
+ # proc igBeginCombo*(label: cstring, preview_value: cstring, flags: ImGuiComboFlags = 0.ImGuiComboFlags): bool {.importc: "igBeginCombo".}
+# proc igSelectable*(label: cstring, selected: bool = false,
+#                    flags: ImGuiSelectableFlags = 0.ImGuiSelectableFlags,
+#                    size: ImVec2 = ImVec2(x: 0, y: 0).ImVec2): bool {.importc: "igSelectable_Bool".}
+# proc igSelectable*(label: cstring, p_selected: ptr bool,
+#                   flags: ImGuiSelectableFlags = 0.ImGuiSelectableFlags,
+#                   size: ImVec2 = ImVec2(x: 0, y: 0).ImVec2): bool {.importc: "igSelectable_BoolPtr".}

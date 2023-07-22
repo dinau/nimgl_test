@@ -45,7 +45,7 @@ ver:
 	@echo [version.nims]
 	-@rg -ie "\d\.\d\.\d" version.nims
 
-GIT_REPO = ../../../00rel/$(TARGET)
+GIT_REPO = ../../00rel/$(TARGET)
 gitup:
 	-rm -fr $(GIT_REPO)/* $(GIT_REPO)/src/* $(GIT_REPO)/img/*
 	-mkdir -p $(GIT_REPO)/src $(GIT_REPO)/img

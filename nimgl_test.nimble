@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.2.0"
+version       = "0.1.0"
 author        = "dinau"
 description   = "nimgl test program with file open dialog"
 license       = "MIT"
