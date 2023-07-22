@@ -4,6 +4,7 @@
 - [Nimgl test program for japanese fonts](#nimgl-test-program-for-japanese-fonts)
   - [Prerequisite](#prerequisite)
   - [Compile and run](#compile-and-run)
+  - [Download: Windows10 sample exe file](#download-windows10-sample-exe-file)
   - [フォント追加方法](#%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E8%BF%BD%E5%8A%A0%E6%96%B9%E6%B3%95)
   - [日本語入力(IME)について](#%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9Bime%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [参考](#%E5%8F%82%E8%80%83)
@@ -60,6 +61,13 @@ $ ./nimgl_test
 - 2023/07
 テーマ3色とフォント4種(Windows10)を選択できるようにした  
    ![alt](img/nimgl-screen-shot-jp-font-2023-07.png)
+
+#### Download: Windows10 sample exe file
+
+---
+
+[nimgl-test-jp-font-imgui-v1.84.2-ime-ok-2023-07.exe.7z](https://bitbucket.org/dinau/storage/downloads/nimgl-test-jp-font-imgui-v1.84.2-ime-ok-2023-07.exe.7z) 
+
 
 #### フォント追加方法
 
