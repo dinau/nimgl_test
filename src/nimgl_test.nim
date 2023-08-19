@@ -6,7 +6,7 @@
 # For Linux Debian 11 Bullseye,
 #   $ sudo apt install xorg-dev libopengl-dev ibgl1-mesa-glx libgl1-mesa-dev
 
-import nimgl/imgui, nimgl/imgui/[impl_opengl, impl_glfw]
+import imgui, imgui/[impl_opengl, impl_glfw]
 import nimgl/[opengl, glfw]
 #
 import std/[os, strutils]
