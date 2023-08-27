@@ -1,85 +1,94 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Nimgl test program for japanese fonts](#nimgl-test-program-for-japanese-fonts)
+- [Nimgl / ImGui test program](#nimgl--imgui-test-program)
+  - [Contents demo program](#contents-demo-program)
   - [Prerequisite](#prerequisite)
-  - [Compile and run](#compile-and-run)
-  - [Download: Windows10 sample exe file](#download-windows10-sample-exe-file)
-  - [フォント追加方法](#%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88%E8%BF%BD%E5%8A%A0%E6%96%B9%E6%B3%95)
-  - [日本語入力(IME)について](#%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9Bime%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
+  - [Examples](#examples)
+  - [Adding fonts](#adding-fonts)
+  - [IME for Japanese / 日本語入力(IME)について](#ime-for-japanese--%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9Bime%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [参考](#%E5%8F%82%E8%80%83)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-### Nimgl test program for japanese fonts
+### Nimgl / ImGui test program
 
-Nimgl: ImGui demo program test for Japanese fonts  
-Written by audin 2023/02
+**Note**: Using  **ImGui v1.89.8** (2023/08) [https://github.com/dinau/nimgl-imgui](https://github.com/dinau/nimgl-imgui)  
+forked from https://github.com/daniel-j/nimgl-imgui .
 
-Nim言語
+#### Contents demo program
 
-ImGui/Nimglで日本語表示・入力のテスト
+---
 
-詳細は[ここ](https://mpu.seesaa.net/article/498328270.html)を参照
+1.  ImDrawList party demo
+1.  Dmeo for setting Japanese fonts and IME input text
 
 #### Prerequisite
 
 ---
-- nim-1.6.14 at this moment
-- For Linux Debian 11 Bullseye
+
+- OS: Windows10 or later, Debian 12 Bookworm (Linux)
+- nim-1.6.14 or later
+- For Linux Debian 12 Bookworm
 
    ```sh
-   $ sudo apt install xorg-dev libopengl-dev ibgl1-mesa-glx libgl1-mesa-dev
+   $ sudo apt install xorg-dev libopengl-dev libgl1-mesa-dev
    ```
 
-#### Compile and run
+- Download 
+
+   ```sh
+   $ git clone https://github.com/dinau/nimgl_test
+   $ cd nimgl_test
+   ```
+
+- Install dependencies
+
+   ```sh
+   $ pwd
+   nimgl_test
+   $ nimble build
+   ```
+
+
+#### Examples
 
 ---
 
-適当な作業フォルダで
+- [ImDrawList coding party - deadline Nov 30, 2020! #3606](https://github.com/ocornut/imgui/issues/3606)  
+This demo has been converted to Nim lang from two programs,  
+[Curve](https://github.com/ocornut/imgui/issues/3606#issuecomment-730648517) and
+[Real-time visualization of the interweb blogosphere](https://github.com/ocornut/imgui/issues/3606#issuecomment-730704909).  
+![alt](img/nimgl-imgui-coding-party-2023-08.png)
+   - Build and run
 
-```sh
-$ git clone https://github.com/dinau/nimgl_test
-$ cd nimgl_test
-```
+      ```sh
+      $ pwd 
+      nimgl_test
+      $ nimble party
+      ```
 
-```sh
-$ make
-```
-
-or
-
-```sh
-$ nimble build 
-```
-
-実行は、
-
-```sh
-$ ./nimgl_test
-```
-
-以下は実行結果  
-- 2023/07
-テーマ3色とフォント4種(Windows10)を選択できるようにした  
+- Dmeo for setting Japanese fonts and IME input text
+   - (2023/07) Selectable three themes and four Japanse fonts (Windows10)  
    ![alt](img/nimgl-screen-shot-jp-font-2023-07.png)
+   - Download: Windows10 sample exe file  
+   [nimgl-test-jp-font-imgui-v1.84.2-ime-ok-2023-07.exe.7z](https://bitbucket.org/dinau/storage/downloads/nimgl-test-jp-font-imgui-v1.84.2-ime-ok-2023-07.exe.7z) 
+   - Build and run
 
-#### Download: Windows10 sample exe file
+      ```sh
+      $ pwd 
+      nimgl_test
+      $ nimble jpfont
+      ```
+
+
+#### Adding fonts 
 
 ---
 
-[nimgl-test-jp-font-imgui-v1.84.2-ime-ok-2023-07.exe.7z](https://bitbucket.org/dinau/storage/downloads/nimgl-test-jp-font-imgui-v1.84.2-ime-ok-2023-07.exe.7z) 
+Source: [setupFonts.nim](https://github.com/dinau/nimgl_test/blob/main/examples/jpFont/setupFonts.nim)
 
-
-#### フォント追加方法
-
----
-
-ソース [setupFonts.nim](https://github.com/dinau/nimgl_test/blob/main/src/setupFonts.nim)
-
-- Nim
-
-  プロトタイプ宣言
+- Nim prototype definition
 
    ```nim
    proc addFontFromFileTTF*(self: ptr ImFontAtlas
@@ -97,7 +106,7 @@ $ ./nimgl_test
   io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\segoeui.ttf", 18.0f);
   ```
 
-#### 日本語入力(IME)について
+#### IME for Japanese / 日本語入力(IME)について
 
 ---
 
