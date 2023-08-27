@@ -26,10 +26,9 @@ switch "define", "release"
 #switch "opt", "size"
 #switch "passC","-O2"
 
-#const LTO = true # further reudce code size
-const LTO = false
+const LTO = false   # if true : further reudce code size
 
-include "version.nims"
+#include "version.nims"
 #
 var TC = "gcc"
 #var TC = "clang"
@@ -41,8 +40,6 @@ if TC != "vcc":
     TC = "gcc"
   if "" == findExe(TC): # if dosn't exist gcc, try clang
     TC = "clang"
-
-#switch "passL","-static-libgcc" # for 32bit Windows ?
 
 # Reduce code size further
 when false:

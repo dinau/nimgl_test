@@ -18,6 +18,8 @@ gitup:
 	cp -f README.md         $(GIT_REPO)/
 	cp -f gitup.mk          $(GIT_REPO)/
 	cp -f setenv.bat        $(GIT_REPO)/
+	cp -f Makefile          $(GIT_REPO)/
+	cp -f config.nims       $(GIT_REPO)/
 	cp -f examples/imDrawListParty/{*.nim,*.ini,Makefile} \
 		$(GIT_REPO)/examples/imDrawListParty/
 	cp -f examples/jpFont/{*.nim,*.ini,Makefile} \

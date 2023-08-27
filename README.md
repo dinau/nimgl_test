@@ -21,7 +21,7 @@ forked from https://github.com/daniel-j/nimgl-imgui .
 ---
 
 1.  ImDrawList party demo
-1.  Dmeo for setting Japanese fonts and IME input text
+1.  Demo for setting Japanese fonts and IME input text
 
 #### Prerequisite
 
