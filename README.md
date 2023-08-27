@@ -68,7 +68,7 @@ This demo has been converted to Nim lang from two programs,
       $ nimble party
       ```
 
-- Dmeo for setting Japanese fonts and IME input text
+- Demo for setting Japanese fonts and IME input text
    - (2023/07) Selectable three themes and four Japanse fonts (Windows10)  
    ![alt](img/nimgl-screen-shot-jp-font-2023-07.png)
    - Download: Windows10 sample exe file  
