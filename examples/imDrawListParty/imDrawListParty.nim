@@ -48,38 +48,38 @@ import random
 randomize()
 
 let sd = 0x7fff
-const N = 300;
-var v:array[N,tuple[first:V2,second:V2]]
-for i, p in v:
-  let rnd = V2(x:(rand(sd) mod 320).cfloat, y:(rand(sd) mod 180).cfloat)
-  v[i].first  = rnd
-  v[i].second = rnd
-proc l2(x:V2): cfloat = x.x * x.x + x.y * x.y
-proc `+`(a,b:V2):V2 = V2(x:a.x+b.x,y:a.y+b.y)
-proc `-`(a,b:V2):V2 = V2(x:a.x-b.x,y:a.y-b.y)
-proc `/`(a:V2,d:cfloat):V2 = V2(x:a.x / d,y:a.y / d)
-proc `+=`(a:var V2,b:V2) = a = a + b
+const N = 300
+var v: array[N, tuple[first: V2, second: V2]]
+for p in v.mitems:
+  let rnd = V2(x: (rand(sd) mod 320).cfloat, y: (rand(sd) mod 180).cfloat)
+  p.first = rnd
+  p.second = rnd
+proc l2(x: V2): cfloat = x.x * x.x + x.y * x.y
+proc `+`(a, b: V2): V2 = V2(x: a.x+b.x, y: a.y+b.y)
+proc `-`(a, b: V2): V2 = V2(x: a.x-b.x, y: a.y-b.y)
+proc `/`(a: V2, d: cfloat): V2 = V2(x: a.x / d, y: a.y / d)
+proc `+=`(a: var V2, b: V2) = a = a + b
 
 proc fxVisual(d: ptr ImDrawList, a, b, s: ImVec2, mouse: ImVec4, tx: cfloat) =
-    var D, T:cfloat
-    for i,p in v:
-      D = sqrt(l2(p.first - p.second))
-      if D > 0:
-        v[i].first +=  (p.second - p.first) / D
-      if D < 4:
-        v[i].second = V2(x:(rand(sd) mod 320).cfloat, y:(rand(sd) mod 180).cfloat)
+  var D, T: cfloat
+  for p in v.mitems:
+    D = sqrt(l2(p.first - p.second))
+    if D > 0:
+      p.first += (p.second - p.first) / D
+    if D < 4:
+      p.second = V2(x: (rand(sd) mod 320).cfloat, y: (rand(sd) mod 180).cfloat)
 
-    for i in  0..<N:
-      var j = i + 1
-      while  j < N:
-        D = l2(v[i].first - v[j].first)
-        T = l2(  v[i].first + v[j].first - s) / 200
-        if T > 255:
-          T = 255
-        if D < 400:
-          d.addLine(a + v[i].first, a + v[j].first,
-                     IM_COL32(T, 255 - T, 255, 70), 2)
-        inc j
+  for i in 0..<N:
+    var j = i + 1
+    while j < N:
+      D = l2(v[i].first - v[j].first)
+      T = l2(v[i].first + v[j].first - s) / 200
+      if T > 255:
+        T = 255
+      if D < 400:
+        d.addLine(a + v[i].first, a + v[j].first,
+                   IM_COL32(T, 255 - T, 255, 70), 2)
+      inc j
 
 # Shared testbed
 proc fxTestBed(title: string, fx: proc(d: ptr ImDrawList, a, b, sz: ImVec2, mouse: ImVec4, tx: cfloat)) =
@@ -107,7 +107,6 @@ proc fxTestBed(title: string, fx: proc(d: ptr ImDrawList, a, b, sz: ImVec2, mous
 proc fxWin() =
   fxTestBed("Curve", fxCurve)
   fxTestBed("Visual", fxVisual)
-
 
 proc mainWin() =
   fxWin()
