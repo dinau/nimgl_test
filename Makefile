@@ -20,5 +20,6 @@ ver:
 	@echo [version.nims]
 	-@rg -ie "\d\.\d\.\d" version.nims
 
-
+gitup:
+	$(MAKE) -f gitup.mk
 
