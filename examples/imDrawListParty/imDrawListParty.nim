@@ -8,7 +8,7 @@ type ImU32 = cuint
 template ImCol32(r, g, b, a: untyped): ImU32 =
   (a.uint32 shl 24) or (b.uint32 shl 16) or (g.uint32 shl 8) or r.uint32
 # convert RR,GG,BB -> AA,BB,GG,RR
-template ImCol32(r, g, b: untyped): ImU32 =
+template ImCol32(r, g, b: untyped): ImU32{.used.} =
   (0xff.uint32 shl 24) or (b.uint32 shl 16) or (g.uint32 shl 8) or r.uint32
 
 #// Function signature:

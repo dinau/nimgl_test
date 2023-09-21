@@ -14,8 +14,8 @@ const MainWinWidth =  960
 const MainWinHeight = 860
 var
   glfwWin: GLFWWindow
-  fExistMultibytesFonts = false
-  sActiveFontName, sActiveFontTitle: string
+  #fExistMultibytesFonts = false
+  #sActiveFontName, sActiveFontTitle: string
   show_demo: bool = true # デモ表示 可否
   clearColor = ccolor(elm:(x:0.45f, y:0.55f, z:0.60f, w:1.0f)) # 背景の色
 
@@ -55,7 +55,7 @@ proc main*() =
   #
   let pio = igGetIO()
   pio.configflags = (pio.configflags.int32 or ImguiConfigflags.NavEnableKeyboard.int32).ImGuiConfigFlags
-  when true:
+  when false:
     pio.configflags = (pio.configflags.int32 or ImguiConfigflags.NavEnableGamepad.int32).ImGuiConfigFlags
     pio.configflags = (pio.configflags.int32 or ImguiConfigflags.DockingEnable.int32).ImGuiConfigFlags
     #pio.configflags = pio.Configflags or ImguiConfigflags_ViewportsEnable.cint
