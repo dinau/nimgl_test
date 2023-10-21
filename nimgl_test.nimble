@@ -11,7 +11,8 @@ bin           = @["nimgl_test"]
 
 requires "nimgl >= 1.0.0"
 requires "https://github.com/dinau/nimgl-imgui >= 1.89.8.3"
-requires "https://github.com/dinau/nim-osdialog >= 0.1.4"  # req: nim-1.6.6 or later
+requires "https://github.com/dinau/nim_implot"
+requires "tynydialogs"
 requires "nim >= 1.6.6"
 
 
@@ -31,8 +32,10 @@ proc buildSrc(TARGET:string) =
 task party,"ImDrawList Party Demo":
   buildSrc("imDrawListParty")
 
-task jpfont,"ImDrawList Party Demo":
+task jpfont,"Show JP font Demo":
   buildSrc("jpfont")
 
+task implot,"Show JP ImPlot Demo":
+  buildSrc("implot_jp")
 
 

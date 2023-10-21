@@ -5,6 +5,9 @@
   - [Contents demo program](#contents-demo-program)
   - [Prerequisite](#prerequisite)
   - [Examples](#examples)
+    - [ImDrawList coding party - deadline Nov 30, 2020! #3606](#imdrawlist-coding-party---deadline-nov-30-2020-3606)
+    - [Demo for setting Japanese fonts and IME input text](#demo-for-setting-japanese-fonts-and-ime-input-text)
+    - [ImPlot demo with Japanese fonts](#implot-demo-with-japanese-fonts)
   - [Adding fonts](#adding-fonts)
   - [IME for Japanese / 日本語入力(IME)について](#ime-for-japanese--%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9Bime%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
   - [参考](#%E5%8F%82%E8%80%83)
@@ -13,7 +16,7 @@
 
 ### Nimgl / ImGui test program
 
-**Note**: Using  **ImGui v1.89.8** (2023/08) [https://github.com/dinau/nimgl-imgui](https://github.com/dinau/nimgl-imgui)  
+**Note**: Using  **ImGui v1.89.9** (2023/09) [https://github.com/dinau/nimgl-imgui](https://github.com/dinau/nimgl-imgui)  
 forked from https://github.com/daniel-j/nimgl-imgui .
 
 #### Contents demo program
@@ -22,6 +25,7 @@ forked from https://github.com/daniel-j/nimgl-imgui .
 
 1.  ImDrawList party demo
 1.  Demo for setting Japanese fonts and IME input text
+1.  ImPlot demo with Japanese fonts
 
 #### Prerequisite
 
@@ -53,9 +57,10 @@ forked from https://github.com/daniel-j/nimgl-imgui .
 
 #### Examples
 
+#####  [ImDrawList coding party - deadline Nov 30, 2020! #3606](https://github.com/ocornut/imgui/issues/3606)  
+
 ---
 
-- [ImDrawList coding party - deadline Nov 30, 2020! #3606](https://github.com/ocornut/imgui/issues/3606)  
 This demo has been converted to Nim lang from two programs,  
 [Curve](https://github.com/ocornut/imgui/issues/3606#issuecomment-730648517) and
 [Real-time visualization of the interweb blogosphere](https://github.com/ocornut/imgui/issues/3606#issuecomment-730704909).  
@@ -68,7 +73,10 @@ This demo has been converted to Nim lang from two programs,
       $ nimble party
       ```
 
-- Demo for setting Japanese fonts and IME input text
+##### Demo for setting Japanese fonts and IME input text
+
+---
+
    - (2023/07) Selectable three themes and four Japanse fonts (Windows10)  
    ![alt](img/nimgl-screen-shot-jp-font-2023-07.png)
    - Download: Windows10 sample exe file  
@@ -80,6 +88,18 @@ This demo has been converted to Nim lang from two programs,
       nimgl_test
       $ nimble jpfont
       ```
+
+##### ImPlot demo with Japanese fonts
+
+---
+
+   ```sh
+   $ pwd 
+   nimgl_test
+   $ nimble implot
+   ```
+
+   ![alt](img/nimgl-implot-demo-jp-font-2023-10.png)  
 
 
 #### Adding fonts 

@@ -1,11 +1,9 @@
 TARGET = $(notdir $(CURDIR))
 
-OPT +=  -d:strip
-OPT +=  -d:release
-OPT +=  --nimcache:.nimcache
+OPT += -d:strip
 
 all:
-	nim cpp  -r $(OPT) $(TARGET)
+	nim cpp  $(OPT) $(TARGET)
 
 clean:
 	@-rm -fr .nimcache

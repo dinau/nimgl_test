@@ -1,8 +1,12 @@
+import std/[math, random]
 import imgui
 
+# Forward definition
 proc mainWin()
 
-type ImU32 = cuint
+type
+  ImU32 = cuint
+  V2 = ImVec2
 
 # convert RR,GG,BB,AA -> AA,BB,GG,RR
 template ImCol32(r, g, b, a: untyped): ImU32 =
@@ -22,10 +26,12 @@ template ImCol32(r, g, b: untyped): ImU32{.used.} =
 #//    t  : time
 #// If not using a given parameter, you can omit its name in your function to save a few characters.
 
-type V2 = ImVec2
 
 #include "fx.inl" // <--- your effect
-import math
+
+#---------
+# fxCurve
+#---------
 proc fxCurve(d: ptr ImDrawList, a, b, sz: ImVec2, mouse: ImVec4, tx: cfloat) =
   var t = tx
   while t < tx + 1.0f:
@@ -44,7 +50,6 @@ proc fxCurve(d: ptr ImDrawList, a, b, sz: ImVec2, mouse: ImVec4, tx: cfloat) =
       , (ts * 200).uint)
     , 5.0f)
 
-import random
 randomize()
 
 let sd = 0x7fff
@@ -60,6 +65,9 @@ proc `-`(a, b: V2): V2 = V2(x: a.x-b.x, y: a.y-b.y)
 proc `/`(a: V2, d: cfloat): V2 = V2(x: a.x / d, y: a.y / d)
 proc `+=`(a: var V2, b: V2) = a = a + b
 
+#----------
+# fxVisual
+#----------
 proc fxVisual(d: ptr ImDrawList, a, b, s: ImVec2, mouse: ImVec4, tx: cfloat) =
   var D, T: cfloat
   for p in v.mitems:
@@ -81,6 +89,9 @@ proc fxVisual(d: ptr ImDrawList, a, b, s: ImVec2, mouse: ImVec4, tx: cfloat) =
                    IM_COL32(T, 255 - T, 255, 70), 2)
       inc j
 
+#-----------
+# fxTestBed
+#-----------
 # Shared testbed
 proc fxTestBed(title: string, fx: proc(d: ptr ImDrawList, a, b, sz: ImVec2, mouse: ImVec4, tx: cfloat)) =
   let io = igGetIO()
@@ -104,10 +115,16 @@ proc fxTestBed(title: string, fx: proc(d: ptr ImDrawList, a, b, sz: ImVec2, mous
   fx(draw_list, p0, p1, size, mouse_data, igGetTime())
   draw_list.popClipRect()
 
+#-------
+# fxWin
+#-------
 proc fxWin() =
   fxTestBed("Curve", fxCurve)
   fxTestBed("Visual", fxVisual)
 
+#---------
+# mainWin
+#---------
 proc mainWin() =
   fxWin()
 

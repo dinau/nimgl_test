@@ -9,8 +9,8 @@ const STATIC_LINK = true
 if hostOS == "windows":
   when STATIC_LINK: # for static link
     switch "backend","cpp"
-    switch "passC", "-static -static-libgcc"
-    switch "passL", "-static -static-libgcc"
+    switch "passC", "-static "
+    switch "passL", "-static "
     # for c backend     https://github.com/nimgl/imgui/pull/9
     #switch "define","cimguiStaticCgcc"
     #switch "gcc.linkerexe","g++"
@@ -67,7 +67,8 @@ case TC
       switch "passC", "-flto"
       switch "passL", "-flto"
   of "clang":
-    commonOpt()
+    discard
+    #commonOpt()
     #switch "passC","-flto=auto"
     #switch "passL","-flto"
 
