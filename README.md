@@ -62,8 +62,11 @@ forked from https://github.com/daniel-j/nimgl-imgui .
 ---
 
 This demo has been converted to Nim lang from two programs,  
-[Curve](https://github.com/ocornut/imgui/issues/3606#issuecomment-730648517) and
-[Real-time visualization of the interweb blogosphere](https://github.com/ocornut/imgui/issues/3606#issuecomment-730704909).  
+[Curve](https://github.com/ocornut/imgui/issues/3606#issuecomment-730648517)  
+![alt](https://user-images.githubusercontent.com/8225057/99726102-5b5a6f80-2ab6-11eb-8785-8a7de588dd6e.gif)  
+and [Real-time visualization of the interweb blogosphere](https://github.com/ocornut/imgui/issues/3606#issuecomment-730704909).  
+
+![alt](https://user-images.githubusercontent.com/35172202/99803095-e2a4f300-2b49-11eb-8979-0bd475c1cfee.gif)
 ![alt](img/nimgl-imgui-coding-party-2023-08.png)
    - Build and run
 
@@ -152,4 +155,3 @@ switch "passL","-limm32"
 [Dear ImGuiで日本語入力時のIMEの位置をいい感じにする](https://qiita.com/babiron_i/items/759d80965b497384bc0e)  
 [Viewport, Platform: Fixed IME positioning for multi-viewport. Moved API from...](http://dalab.se.sjtu.edu.cn/gitlab/xiaoyuwei/imgui/-/commit/cb78e62df93732b64afcc9d4cd02e378730b32af)  
 [ImGui で日本語と記号♥と絵文字😺の表示](https://zenn.dev/tenka/articles/display_japanese_symbols_and_emoji_with_imgui)  
-
