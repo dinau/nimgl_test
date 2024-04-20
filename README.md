@@ -32,8 +32,8 @@ forked from https://github.com/daniel-j/nimgl-imgui .
 ---
 
 - OS: Windows10 or later, Debian 12 Bookworm (Linux)
-- nim-1.6.14 or later
-- For Linux Debian 12 Bookworm
+- nim-1.6.20 or later
+- For Linux Debian 12 Bookworm or later
 
    ```sh
    $ sudo apt install xorg-dev libopengl-dev libgl1-mesa-dev

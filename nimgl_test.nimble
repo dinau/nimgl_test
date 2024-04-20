@@ -11,7 +11,7 @@ bin           = @["nimgl_test"]
 
 requires "nimgl >= 1.0.0"
 requires "https://github.com/dinau/nimgl-imgui >= 1.89.8.3"
-requires "https://github.com/dinau/nim_implot"
+requires "https://github.com/dinau/nim_implot  >= 0.16.6"
 requires "tynydialogs"
 requires "nim >= 1.6.6"
 
@@ -37,5 +37,3 @@ task jpfont,"Show JP font Demo":
 
 task implot,"Show JP ImPlot Demo":
   buildSrc("implot_jp")
-
-
