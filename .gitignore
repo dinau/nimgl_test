@@ -1,4 +1,5 @@
 # Created by https://www.gitignore.io/api/c,nim,osx,c++,linux,macos,windows,visualstudiocode
+org.html
 .hg
 dll/
 .nimcache

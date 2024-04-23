@@ -23,6 +23,7 @@ include "setupFonts.nim"
 proc demo_LinePlots()
 proc demo_SimplePlot()
 proc demo_Histogram()
+proc setStyle(style:int)
 
 # メインウインドウのサイズ
 const MainWinWidth = 1080
@@ -43,7 +44,7 @@ const MainWinHeight = 800
 #  |    -      | -        |     true            ||    v    |     v       |   -     | Transparent Viewport and docking
 #  `-----------'----------'---------------------'`---------'-------------'---------'-------------
 var
- fDocking = true
+ fDocking = false
  fViewport = false
  TransparentViewport = false
  #
@@ -59,6 +60,7 @@ type ccolor* {.union.} = object
 
 # Global variables
 var
+  defaultTheme = 2 # classic
   showDemoWindow: bool = true # デモ表示 可否
   showFirstWindow = true
   glfwWin: GLFWWindow
@@ -129,10 +131,7 @@ proc winMain(hWin: GLFWWindow) =
   else:
     clearColor = ccolor(elm:(x:0.25f, y:0.65f, z:0.85f, w:1.0f))
   # テーマの起動時配色 選択 theme
-  #igStyleColorsLight()   # Windows風
-  igStyleColorsDark() # ダーク系1
-  #igStyleColorsClassic() # ダーク系2
-  #igStyleColorsCherry()  # ダーク系3
+  setStyle(defaultTheme)
   #
   # 日本語フォントを追加
   (fExistMultbytesFonts, sActiveFontName, sActiveFontTitle) = setupFonts()
@@ -181,19 +180,36 @@ proc helpMarker(desc: string) =
     igPopTextWrapPos()
     igEndTooltip()
 
-#-------------------
-# showStyleSelector
-#-------------------
-proc showStyleSelector(label: string): bool =
-  var style_idx {.global.}: int32 = -1
-  if igCombo(label, addr style_idx, "Dark\0Light\0Classic\0"):
-    case style_idx
+#----------
+# setStyle
+#----------
+proc setStyle(style:int) =
+  case style
     of 0: igStyleColorsDark()
     of 1: igStyleColorsLight()
     of 2: igStyleColorsClassic()
     else: discard
-    return true
-  return false
+
+#-------------------
+# showStyleSelector
+#-------------------
+proc showStyleSelector(label: string, theme:var int) =
+                   #  0   ,    1   ,     2
+  const cmbItems = ["Dark", "Light", "Classic"]
+  var itemIndex{.global.}:int
+  if theme >= 0:
+    itemIndex = theme
+    theme = -1
+  var cmbStrPrevew = cmbItems[itemIndex]
+  igSetNextItemWidth(100)
+  if igBeginCombo("テーマ色選択".cstring, cmbStrPrevew.cstring, 0.ImguiComboFlags):
+    defer: igEndCombo()
+    for n, item in cmbItems:
+      var is_selected = itemIndex == n
+      if igSelectable(item.cstring, addr is_selected, 0.ImGui_SelectableFlags, ImVec2(x: 100, y: 0)):
+        if is_selected: igSetItemDefaultFocus()
+        itemIndex = n
+        setStyle(itemIndex)
 
 #-------------------
 # firstWindow
@@ -216,7 +232,7 @@ proc firstWindow() =
     s = "OpenGL v" & ($cast[cstring](glGetString(GL_VERSION))).split[0]
     igText(s.cstring)
     ### テーマの選択
-    discard showStyleSelector("テーマ色の選択")
+    showStyleSelector("テーマ色の選択",defaultTheme)
     ### フォント選択 コンボボックス
     igSeparator()
     var fontCurrent = igGetfont()
@@ -263,8 +279,9 @@ proc firstWindow() =
     igSeparator()
     igCheckbox("デモ・ウインドウ表示", showDemoWindow.addr)
 
+  if igBegin("ImPlotデモ".cstring):
+    defer: igEnd()
     # ImPlot Demo
-    igSeparator()
     demo_SimplePlot()
     igSeparator()
     demo_LinePlots()

@@ -77,5 +77,3 @@ switch "cc", TC
 echo ""
 echo "#### Compiler: [ ", TC, " ] ####"
 echo ""
-
-

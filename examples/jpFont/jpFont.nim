@@ -12,7 +12,7 @@ import nimgl/[opengl, glfw]
 #
 import std/[os, strutils]
 import tinydialogs
-include "setupFonts.nim"
+include ../utils/setupFonts
 
 # メインウインドウのサイズ
 const MainWinWidth = 1080

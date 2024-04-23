@@ -1,5 +1,6 @@
 TARGET = $(notdir $(CURDIR))
 
+OPT += -d:release
 OPT += -d:strip
 
 .PHONY: run clean

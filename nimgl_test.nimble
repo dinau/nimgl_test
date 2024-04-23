@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.5.0"
+version       = "0.7.0"
 author        = "dinau"
 description   = "nimgl test program with file open dialog"
 license       = "MIT"
@@ -12,8 +12,8 @@ bin           = @["nimgl_test"]
 requires "nimgl >= 1.0.0"
 requires "https://github.com/dinau/nimgl-imgui >= 1.89.8.3"
 requires "https://github.com/dinau/nim_implot  >= 0.16.6"
-requires "tynydialogs"
-requires "nim >= 1.6.6"
+requires "tinydialogs"
+requires "nim >= 1.6.20"
 
 
 import strformat
