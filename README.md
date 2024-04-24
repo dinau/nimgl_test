@@ -7,6 +7,7 @@
   - [Examples](#examples)
     - [glfw_opengl3.nim](#glfw_opengl3nim)
     - [glfw_opengl3_image_load.nim](#glfw_opengl3_image_loadnim)
+    - [glfw_opengl3_implot.nim](#glfw_opengl3_implotnim)
     - [imDrawListParty.nim](#imdrawlistpartynim)
     - [implot_jp.nim](#implot_jpnim)
     - [jpFont.nim](#jpfontnim)
@@ -81,6 +82,19 @@ forked from https://github.com/daniel-j/nimgl-imgui .
    ```
 
 ![alt](img/glfw_opengl3_image_load.png)
+
+#####  [glfw_opengl3_implot.nim](examples/glfw_opengl3_implot/glfw_opengl3_implot.nim)
+
+---
+
+   ```sh
+   $ pwd 
+   nimgl_test
+   $ cd examples/glfw_opengl3_implot
+   $ make run
+   ```
+
+![alt](img/glfw_opengl3_implot.png)
 
 ##### [imDrawListParty.nim](examples/imDrawListParty/imDrawListParty.nim)
 

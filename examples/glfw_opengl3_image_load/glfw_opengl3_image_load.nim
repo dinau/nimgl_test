@@ -163,7 +163,7 @@ proc winMain(hWin: glfw.GLFWWindow) =
       igText(s.cstring)
       s = "OpenGL v" & ($cast[cstring](glGetString(GL_VERSION))).split[0]
       igText(s.cstring)
-      igInputTextWithHint("InputText".cstring ,"Input text here".cstring ,sBuf,sBuf.len.uint)
+      igInputTextWithHint("InputText".cstring ,"Input text here".cstring ,sBuf.cstring,sBuf.len.uint)
       igCheckbox("Demo window", addr showDemoWindow)
       igCheckbox("Another window", addr showAnotherWindow)
       igSliderFloat("Float", addr fval, 0.0f, 1.0f, "%.3f")

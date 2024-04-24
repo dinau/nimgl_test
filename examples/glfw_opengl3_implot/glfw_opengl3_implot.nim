@@ -1,7 +1,8 @@
-import std/[strutils]
-import nimgl/[opengl,glfw]
+import std/[random,sugar,strutils]
 
+import nimgl/[opengl,glfw]
 import imgui, imgui/[impl_opengl, impl_glfw]
+import implot
 
 include ../utils/setupFonts
 include ../utils/simple
@@ -39,6 +40,50 @@ block:
 #---------------------
 proc winMain(hWin: glfw.GLFWWindow)
 
+#-----------
+# templates
+#-----------
+template ptz(val:untyped): untyped =
+  val[0].addr
+type
+  Ims32 = cint
+
+#--------------
+# imPlotWindow
+#--------------
+proc imPlotWindow(fshow:var bool) =
+  var
+    bar_data{.global.}:seq[Ims32]
+    x_data  {.global.}:seq[Ims32]
+    y_data  {.global.}:seq[Ims32]
+  once: # This needs when set up compilation option to --mm:arc,--mm:orc and use nim-2.0.0 later,
+        # workaround {.global.} pragma issue.
+    bar_data= collect(for i in 0..10: rand(100).Ims32)
+    x_data  = collect(for i in 0..10: i.Ims32)
+    y_data  = collect(for i in 0..10: (i * i).Ims32)
+
+  if igBegin("Plot Window".cstring, addr fshow):
+    defer: igEnd()
+    #
+    if ipBeginPlot("My Plot",ImVec2(x:0.0f,y:0.0f),0.ImplotFlags):
+      defer: ipEndPlot()
+      #
+      ipPlotBars("My Bar Plot".cstring
+                              ,bar_data.ptz
+                              ,bar_data.len.cint
+                              ,0.67.cdouble # bar_size
+                              ,0.0.cdouble  # shift
+                              ,0.ImPlotBarsFlags
+                              ,0.cint # offset
+                              ,sizeof(Ims32).cint) # stride
+      ipPlotLine("My Line Plot".cstring
+                              , x_data.ptz
+                              , y_data.ptz
+                              , xdata.len.cint
+                              ,0.ImPlotLineFlags
+                              ,0.cint # offset
+                              ,sizeof(Ims32).cint) # stride
+
 #------
 # main
 #------
@@ -68,6 +113,11 @@ proc main() =
   # setup ImGui
   let context = igCreateContext(nil)
   defer: context.igDestroyContext()
+
+  # setup ImPlot
+  var imPlotContext = ipCreateContext()
+  defer: ipDestroyContext(imPlotContext)
+
   if fDocking:
     var pio = igGetIO()
     pio.configFlags = cast[ImGuiConfigFlags](pio.configFlags.int or ImGuiConfigFlags.DockingEnable.int)
@@ -90,6 +140,7 @@ proc winMain(hWin: glfw.GLFWWindow) =
   var
     showDemoWindow = true
     showAnotherWindow = false
+    showImPlotWindow = true
     showFirstWindow = true
     fval = 0.5f
     counter = 0
@@ -105,6 +156,9 @@ proc winMain(hWin: glfw.GLFWWindow) =
   # Add multibytes font
   discard setupFonts()
 
+  # for ImPlot
+  discard initRand()
+
   var pio = igGetIO()
 
   # main loop
@@ -118,6 +172,7 @@ proc winMain(hWin: glfw.GLFWWindow) =
 
     if showDemoWindow:
       igShowDemoWindow(addr showDemoWindow)
+      ipShowDemoWindow(addr showDemoWindow)
 
     # show a simple window that we created ourselves.
     if showFirstWindow:
@@ -157,6 +212,10 @@ proc winMain(hWin: glfw.GLFWWindow) =
         showAnotherWindow = false
       igEnd()
 
+    # ImPlot test
+    if showImPlotWindow:
+      imPlotWindow(showImPlotWindow)
+
     # render
     igRender()
     glClearColor(clearColor.elm.x, clearColor.elm.y, clearColor.elm.z, clearColor.elm.w)
@@ -170,8 +229,10 @@ proc winMain(hWin: glfw.GLFWWindow) =
       backup_current_window.makeContextCurrent()
 
     hWin.swapBuffers()
-    if not showFirstWindow and not showDemoWindow and not showAnotherWindow:
+    if not showFirstWindow and not showDemoWindow and not showAnotherWindow and
+       not showImPlotWindow:
       hwin.setWindowShouldClose(true) # End program
+
 #------
 # main
 #------
