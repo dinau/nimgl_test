@@ -171,7 +171,7 @@ switch "passL","-limm32"
 
 ---
 
-- Nim Compiler Version 2.0.4 
+- Nim Compiler Version 2.0.6 
 - gcc.exe (Rev2, Built by MSYS2 project) 13.2.0-2
 - gcc-libs 13.2.0-2
 - binutils 2.41-3 
