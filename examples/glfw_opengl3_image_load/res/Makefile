@@ -6,6 +6,6 @@ png:
 
 
 res:
-	#png2ico  img/imguin.ico ../icon.png
+	@#png2ico  img/imguin.ico ../icon.png
 	windres -O coff imguin.rc -o imguin32.res
 	windres -O coff imguin.rc -o imguin64.res

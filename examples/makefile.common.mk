@@ -1,4 +1,7 @@
 TARGET = $(notdir $(CURDIR))
+ifeq ($(OS),Windows_NT)
+	EXE = .exe
+endif
 
 OPT += -d:release
 OPT += -d:strip
@@ -7,10 +10,11 @@ OPT += -d:strip
 
 all:
 	nim cpp  $(OPT) $(TARGET)
+	$(ADDED_COMMAND)
 
 run: all
 	./$(TARGET)
 
 clean:
 	@-rm -fr .nimcache
-	@-rm $(TARGET)
+	@-rm $(TARGET)$(EXE)

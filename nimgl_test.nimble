@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.7.0"
+version       = "0.9.0"
 author        = "dinau"
 description   = "nimgl test program with file open dialog"
 license       = "MIT"
@@ -10,8 +10,8 @@ bin           = @["nimgl_test"]
 # Dependencies
 
 requires "nimgl >= 1.0.0"
-requires "https://github.com/dinau/nimgl-imgui >= 1.89.8.3"
-requires "https://github.com/dinau/nim_implot  >= 0.16.6"
+requires "https://github.com/dinau/nimgl-imgui == 1.89.9.6"
+requires "https://github.com/dinau/nim_implot  == 0.16.8"
 requires "tinydialogs"
 requires "nim >= 1.6.20"
 

@@ -1,25 +1,8 @@
-TARGET = nimgl_test
+MAKEFLAGS += --no-print-directory
 
-.PHONY: clean ver
+all:
+	$(MAKE) -C examples
 
-all: build
-
-build:
-	@nimble build --verbose
-
+.PHONEY: clean
 clean:
-	@nimble clean --verbose
-
-run:
-	@nimble run --verbose
-
-ver:
-	@# version check
-	@echo [$(TARGET).nimlbe]
-	-@rg -ie "version\s+=.+" $(TARGET).nimble
-	@echo [version.nims]
-	-@rg -ie "\d\.\d\.\d" version.nims
-
-gitup:
-	$(MAKE) -f gitup.mk
-
+	$(MAKE) -C examples clean

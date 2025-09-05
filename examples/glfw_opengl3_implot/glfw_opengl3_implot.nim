@@ -91,14 +91,12 @@ proc main() =
   doAssert glfwInit()
   defer: glfwTerminate()
 
-  if TransparentViewport:
-    glfwWindowHint(GLFWVisible, GLFW_FALSE)
-
   glfwWindowHint(GLFWContextVersionMajor, 3)
   glfwWindowHint(GLFWContextVersionMinor, 3)
   glfwWindowHint(GLFWOpenglForwardCompat, GLFW_TRUE)
   glfwWindowHint(GLFWOpenglProfile, GLFW_OPENGL_CORE_PROFILE)
   glfwWindowHint(GLFWResizable, GLFW_TRUE)
+  glfwWindowHint(GLFWVisible, GLFW_FALSE) # Hide main window at start up time. See TODO 1
   #
   var glfwWin = glfwCreateWindow(MainWinWidth, MainWinHeight)
   if glfwWin.isNil:
@@ -145,7 +143,9 @@ proc winMain(hWin: glfw.GLFWWindow) =
     fval = 0.5f
     counter = 0
     sBuf = newString(200)
-  var clearColor:ccolor
+    clearColor:ccolor
+    showWindowDelay = 1 # TODO 1
+
   if TransparentViewport:
     clearColor = ccolor(elm:(x:0f, y:0f, z:0f, w:0.0f)) # Transparent
   else:
@@ -232,6 +232,12 @@ proc winMain(hWin: glfw.GLFWWindow) =
     if not showFirstWindow and not showDemoWindow and not showAnotherWindow and
        not showImPlotWindow:
       hwin.setWindowShouldClose(true) # End program
+
+    if showWindowDelay > 0:
+      dec showWindowDelay
+    else:
+      once: # Avoid flickering screen at startup.
+        hWin.showWindow()
 
 #------
 # main

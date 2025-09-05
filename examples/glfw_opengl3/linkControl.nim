@@ -1,4 +1,4 @@
-# switch "app","gui"
+switch "app","gui"
 
 #---------------------------------------
 # Select static link or shared/dll link

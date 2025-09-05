@@ -1,3 +1,4 @@
 
-include ../makefile.common.mk
+ADDED_COMMAND = make -C res
 
+include ../makefile.common.mk
