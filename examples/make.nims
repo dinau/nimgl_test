@@ -3,15 +3,12 @@ import std/[os,strutils]
 var projDirs = @[
 "glfw_opengl3",
 "glfw_opengl3_image_load",
+"glfw_opengl3_implot",
 "imDrawListParty",
-"jpFont",
 "implot_jp",
+"jpFont",
 ]
 
-if hostOS == "windows":
-  projDirs.add "sdl2_opengl3"
-
-projDirs.add "fontx2v"
 
 #-------------
 # compileProj
@@ -30,7 +27,6 @@ proc compileProj(cmd:string) =
             discard
         else:
           exec("make $# $#" % [options,cmd])
-
 
 #------
 # main

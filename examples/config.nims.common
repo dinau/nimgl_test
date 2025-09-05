@@ -2,9 +2,9 @@ switch "path","../../src"
 switch "hint","User:off"
 switch "hint","Name:off"
 switch "hint","XDeclaredButNotUsed:off"
-#switch "hint","HoleEnumConv:off"
 
-#switch "app","gui" # dismiss background Window
+switch "warning","HoleEnumConv:off"
+
 
 #switch "passC","-std=c++17"
 
