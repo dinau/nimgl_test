@@ -14,6 +14,7 @@ requires "https://github.com/dinau/nimgl-imgui == 1.89.9.6"
 requires "implot == 0.16.8"
 requires "tinydialogs"
 requires "nim >= 1.6.20"
+requires "stb_image == 2.5"
 
 
 import strformat
