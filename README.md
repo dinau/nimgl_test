@@ -44,7 +44,7 @@ forked from https://github.com/daniel-j/nimgl-imgui .
 
    ```sh
    $ sudo apt install libopengl-dev  libgl1-mesa-dev libglfw3-dev
-   $ sudo apt install libxcursor-dev libx11-dev libxext-dev libxinerama-dev
+   $ sudo apt install libxcursor-dev libx11-dev libxext-dev libxinerama-dev libxi-dev
    ```
 #### Install dependencies
 
