@@ -43,7 +43,8 @@ forked from https://github.com/daniel-j/nimgl-imgui .
 - For Linux Debian13 or later
 
    ```sh
-   $ sudo apt install  libopengl-dev libgl1-mesa-dev libglfw3-dev
+   $ sudo apt install libopengl-dev  libgl1-mesa-dev libglfw3-dev
+   $ sudo apt install libxcursor-dev libx11-dev libxext-dev
    ```
 #### Install dependencies
 
